@@ -7,7 +7,7 @@ jest.mock("uuid", () => {
   }
 });
 
-describe("calculator tests", () => {
+describe("generate protocols for pacients unit tests", () => {
   it("should generate a protocol for pacient", () => {
     const protocol = generateProtocolForPacient(faker.person.firstName(), faker.person.lastName(), faker.datatype.boolean());
     expect(protocol).toEqual({
