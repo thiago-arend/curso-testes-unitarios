@@ -54,7 +54,7 @@ describe("Order Service Tests", () => {
     const invalidProtocol = new Date("2025-01-01").getTime().toString();
 
     jest.spyOn(orderRepository, "getByProtocol").mockImplementationOnce((): any => {
-      return undefined
+      return null // prisma default return for resource not found
     });
 
     const returnedOrder = await orderService.getOrderByProtocol(invalidProtocol);
