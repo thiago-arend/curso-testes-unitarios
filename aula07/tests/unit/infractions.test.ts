@@ -22,7 +22,7 @@ describe("Infractions Service Tests", () => {
     expect(userInfractions).toEqual({ ...userMock, infractions: userInfracMoc });
   });
 
-  it("should throw an error when driver license does not exists", async () => {
+  it("should throw an error when driver license does not exists", () => {
     const licenceIdMock = "doesn't matter";
 
     jest.spyOn(usersRepository, "getUserByDocument").mockImplementationOnce((): any => {

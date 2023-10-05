@@ -1,6 +1,7 @@
 import * as orderService from "../../src/order-service";
 import * as orderRepository from "../../src/order-repository";
 import { OrderInput } from "../../src/validator";
+import { faker } from "@faker-js/faker";
 
 type OrderMockData = {
   protocol: string,
@@ -14,13 +15,15 @@ beforeEach(() => {
 describe("Order Service Tests", () => {
   it("should create an order", async () => {
     const order: OrderInput = {
-      client: "João",
-      description: "Pedido João"
+      client: faker.person.firstName(),
+      description: faker.commerce.productDescription()
     };
+
+    const protocol = "fake protocol";
 
     jest.spyOn(orderRepository, "create").mockImplementationOnce((): any => {
       return {
-        protocol: new Date().getTime().toString(),
+        protocol,
         status: "IN_PREPARATION"
       }
     });
@@ -29,7 +32,7 @@ describe("Order Service Tests", () => {
 
     expect(orderRepository.create).toBeCalledWith(order);
     expect(createdOrder).toEqual({
-      protocol: expect.any(String),
+      protocol,
       status: "IN_PREPARATION"
     });
   });
